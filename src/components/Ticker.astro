@@ -1,0 +1,48 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="ticker" role="marquee" aria-label="Scrolling highlights">
+  <div class="ticker__track">
+    {[...items, ...items].map((item) => (
+      <span class="ticker__item">{item}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker {
+    overflow: hidden;
+    border-block: 1px solid var(--color-border);
+  }
+
+  .ticker__track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll 30s linear infinite;
+  }
+
+  .ticker__item {
+    padding: var(--space-3) var(--space-4);
+    white-space: nowrap;
+  }
+
+  @keyframes ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker__track {
+      animation: none;
+    }
+  }
+</style>

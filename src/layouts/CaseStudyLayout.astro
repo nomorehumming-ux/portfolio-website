@@ -1,0 +1,51 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  role?: string;
+  year?: string;
+}
+
+const { title, description, role, year } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="case-study">
+    <header class="case-study__header">
+      <h1>{title}</h1>
+      {(role || year) && (
+        <p class="case-study__meta">
+          {role}
+          {role && year && " · "}
+          {year}
+        </p>
+      )}
+    </header>
+
+    <div class="case-study__body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .case-study__meta {
+    color: var(--color-muted);
+    margin-top: var(--space-2);
+  }
+
+  .case-study__body {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+</style>

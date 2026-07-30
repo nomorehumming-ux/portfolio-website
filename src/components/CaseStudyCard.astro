@@ -1,0 +1,45 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  image: ImageMetadata;
+}
+
+const { href, title, description, image } = Astro.props;
+---
+
+<a class="case-study-card" href={href}>
+  <Image class="case-study-card__image" src={image} alt="" />
+  <div class="case-study-card__text">
+    <h3>{title}</h3>
+    {description && <p>{description}</p>}
+  </div>
+</a>
+
+<style>
+  .case-study-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .case-study-card__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  .case-study-card__text {
+    margin-top: var(--space-2);
+  }
+
+  .case-study-card__text p {
+    color: var(--color-muted);
+    margin-top: var(--space-1);
+  }
+</style>
