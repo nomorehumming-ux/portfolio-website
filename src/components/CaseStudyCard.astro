@@ -1,45 +1,102 @@
 ---
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
-
 interface Props {
   href: string;
   title: string;
-  description?: string;
-  image: ImageMetadata;
+  year: string;
+  tags: string[];
+  description: string;
 }
 
-const { href, title, description, image } = Astro.props;
+const { href, title, year, tags, description } = Astro.props;
 ---
 
-<a class="case-study-card" href={href}>
-  <Image class="case-study-card__image" src={image} alt="" />
-  <div class="case-study-card__text">
-    <h3>{title}</h3>
-    {description && <p>{description}</p>}
+<article class="case-study-card">
+  <div class="case-study-card__header">
+    <div class="case-study-card__info">
+      <h3 class="case-study-card__title">{title}</h3>
+      <p class="case-study-card__meta">{year} | {tags.join(", ")}</p>
+      <a class="case-study-card__cta" href={href}>
+        Learn more <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+    <p class="case-study-card__description">{description}</p>
   </div>
-</a>
+
+  <div class="case-study-card__image" role="img" aria-label={`${title} preview placeholder`}></div>
+</article>
 
 <style>
   .case-study-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .case-study-card__header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .case-study-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .case-study-card__title {
+    font-family: var(--text-h2-font);
+    font-weight: var(--text-h2-weight);
+    font-size: var(--text-h2-size);
+    letter-spacing: var(--text-h2-letter-spacing);
+    color: var(--color-fg);
+  }
+
+  .case-study-card__meta {
+    font-family: var(--text-body-regular-font);
+    font-weight: var(--text-body-regular-weight);
+    font-size: var(--text-body-regular-size);
+    letter-spacing: var(--text-body-regular-letter-spacing);
+    color: var(--color-muted);
+  }
+
+  .case-study-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-top: var(--space-1);
+    padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+    border-radius: 999px;
+    background: var(--color-fg);
+    color: var(--color-white);
+    font-family: var(--text-body-bold-font);
+    font-weight: var(--text-body-bold-weight);
+    font-size: var(--text-body-bold-size);
     text-decoration: none;
-    color: inherit;
+  }
+
+  .case-study-card__cta:hover {
+    background: var(--color-grey200);
+  }
+
+  .case-study-card__description {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-fg);
+    margin-top: var(--space-1);
   }
 
   .case-study-card__image {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 0.5rem;
+    aspect-ratio: 16 / 9;
+    background: var(--color-grey950);
+    border: 1px solid var(--color-border);
   }
 
-  .case-study-card__text {
-    margin-top: var(--space-2);
-  }
-
-  .case-study-card__text p {
-    color: var(--color-muted);
-    margin-top: var(--space-1);
+  @media (max-width: 48rem) {
+    .case-study-card__header {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  name: string;
+  description: string;
+}
+
+const { name, description } = Astro.props;
+---
+
+<section class="hero">
+  <h1 class="hero__title">
+    <span class="hero__title-name">{name}</span>
+    <span class="hero__title-desc">{description}</span>
+  </h1>
+</section>
+
+<style>
+  .hero {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-3) var(--space-5);
+  }
+
+  .hero__title {
+    font-family: var(--text-display-font);
+    font-weight: var(--text-display-weight);
+    font-size: var(--text-display-size);
+    letter-spacing: var(--text-display-letter-spacing);
+    line-height: var(--text-display-line-height);
+    color: var(--color-fg);
+  }
+
+  .hero__title-name {
+    display: block;
+  }
+
+  @media (max-width: 48rem) {
+    .hero__title {
+      font-size: 2.5rem;
+    }
+  }
+</style>

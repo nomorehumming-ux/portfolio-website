@@ -1,41 +1,132 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import MediaTicker from "../components/MediaTicker.astro";
+import CaseStudyCard from "../components/CaseStudyCard.astro";
+import ServicesList from "../components/ServicesList.astro";
 
 const base = import.meta.env.BASE_URL;
 
 const caseStudies = [
-  { slug: "case-study-1", title: "Case Study 1" },
-  { slug: "case-study-2", title: "Case Study 2" },
-  { slug: "case-study-3", title: "Case Study 3" },
+  {
+    slug: "case-study-1",
+    title: "March for Science",
+    year: "2024",
+    tags: ["Product design", "UI/UX", "User research"],
+    description:
+      "This project involved redesign of the 'March for Science Foundation' website, a non-profit organization dedicated to promoting science. Our work was a volunteer effort as part of the larger 'Strona od Nowa' initiative.",
+  },
+  {
+    slug: "case-study-2",
+    title: "Talebook Autotag",
+    year: "2023",
+    tags: ["Product design", "UI/UX", "User research"],
+    description:
+      "Autotag is a feature for Talebook, an interactive research repository platform. It automatically attributes tags to the pieces of data researchers collected during the user research study.",
+  },
+  {
+    slug: "case-study-3",
+    title: "Comm-Bud",
+    year: "2023",
+    tags: ["Product design", "UI/UX", "User research"],
+    description:
+      "Comm-Bud app makes finding a contractor for a construction project easier. This product was designed during a hackathon Build the Beaty, organized by L'Oreal, Saint-Gobain, and Generator Pomysłów. The app received a 3rd award in the hackathon contest.",
+  },
+];
+
+const services = [
+  {
+    title: "User research",
+    description:
+      "From heuristic evaluation, through stakeholder interviews and usability testing to competitive analysis. My design choices are consistently guided by insights gained through research.",
+    icon: "research",
+  },
+  {
+    title: "Product design",
+    description:
+      "As a UX designer, I specialize in product design. I excel in crafting intuitive user flows through constructing precise wireframes, and impactful prototypes.",
+    icon: "product-design",
+  },
+  {
+    title: "Branding & visual identity",
+    description:
+      "I create bespoke visual identity, that clearly communicate client's mission.",
+    icon: "branding",
+  },
+  {
+    title: "Illustration & iconography",
+    description:
+      "I create custom symbols, pictograms, and playful characters that tell a story and bring your visual world to life.",
+    icon: "illustration",
+  },
+  {
+    title: "Motion design",
+    description:
+      "Breathing life into interfaces through purposeful animation. I use movement to elevate the user experience and showcase your brand in action.",
+    icon: "motion",
+  },
 ];
 ---
 
-<BaseLayout title="Portfolio" description="Selected work">
-  <section class="work">
-    <h1>Selected work</h1>
-    <ul class="work__list">
+<BaseLayout title="Bartek Dzięgiel — Portfolio" description="Warsaw based designer working across illustration, motion design and interfaces.">
+  <Hero
+    name="I'm Bartek Dzięgiel,"
+    description="Warsaw based designer working across illustration, motion design and interfaces, building practical products and experiences."
+  />
+
+  <MediaTicker />
+
+  <section class="selected-work" id="work">
+    <h2 class="section-heading">Selected work</h2>
+    <div class="selected-work__list">
       {caseStudies.map((study) => (
-        <li>
-          <a href={`${base}work/${study.slug}`}>{study.title}</a>
-        </li>
+        <CaseStudyCard
+          href={`${base}work/${study.slug}`}
+          title={study.title}
+          year={study.year}
+          tags={study.tags}
+          description={study.description}
+        />
       ))}
-    </ul>
+    </div>
+  </section>
+
+  <section class="services">
+    <h2 class="section-heading">Services</h2>
+    <ServicesList services={services} />
   </section>
 </BaseLayout>
 
 <style>
-  .work {
+  .selected-work,
+  .services {
     max-width: var(--content-max-width);
     margin-inline: auto;
-    padding: var(--space-5) var(--space-3);
+    padding: var(--space-6) var(--space-3);
   }
 
-  .work__list {
-    margin-top: var(--space-4);
+  .selected-work {
+    margin-top: 5rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-heading {
+    font-family: var(--text-section-heading-font);
+    font-weight: var(--text-section-heading-weight);
+    font-size: var(--text-section-heading-size);
+    letter-spacing: var(--text-section-heading-letter-spacing);
+    color: var(--color-fg);
+  }
+
+  .selected-work__list {
+    margin-top: var(--space-5);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    list-style: none;
-    padding: 0;
+    gap: var(--space-6);
+  }
+
+  .services .services-list {
+    margin-top: var(--space-4);
   }
 </style>

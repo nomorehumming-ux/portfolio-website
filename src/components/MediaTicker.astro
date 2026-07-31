@@ -1,0 +1,146 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  speedSeconds?: number;
+}
+
+const { speedSeconds = 40 } = Astro.props;
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/images/ticker/row-*/*.{jpg,jpeg,png,webp,gif,svg}",
+  { eager: true },
+);
+const videoModules = import.meta.glob<string>(
+  "../assets/images/ticker/row-*/*.webm",
+  { eager: true, query: "?url", import: "default" },
+);
+
+type TickerItem =
+  | { type: "image"; path: string; src: ImageMetadata }
+  | { type: "video"; path: string; src: string };
+
+function rowItems(row: "row-1" | "row-2"): TickerItem[] {
+  const images: TickerItem[] = Object.entries(imageModules)
+    .filter(([path]) => path.includes(`/ticker/${row}/`))
+    .map(([path, mod]) => ({ type: "image", path, src: mod.default }));
+  const videos: TickerItem[] = Object.entries(videoModules)
+    .filter(([path]) => path.includes(`/ticker/${row}/`))
+    .map(([path, src]) => ({ type: "video", path, src }));
+  return [...images, ...videos].sort((a, b) => a.path.localeCompare(b.path));
+}
+
+const rows = [
+  { items: rowItems("row-1"), direction: "left" as const },
+  { items: rowItems("row-2"), direction: "right" as const },
+];
+---
+
+<div class="media-ticker">
+  {rows.map((row) => (
+    <div class="media-ticker__row" data-direction={row.direction}>
+      {row.items.length > 0 ? (
+        <div
+          class="media-ticker__track"
+          style={`--ticker-duration: ${speedSeconds}s`}
+        >
+          {[...row.items, ...row.items].map((item) => (
+            <div class="media-ticker__tile">
+              {item.type === "image" ? (
+                <Image src={item.src} alt="" />
+              ) : (
+                <video src={item.src} autoplay loop muted playsinline />
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="media-ticker__track media-ticker__track--placeholder">
+          {[1, 2, 3].map(() => (
+            <div class="media-ticker__tile media-ticker__tile--placeholder">
+              <span>Add image/webm to src/assets/images/ticker/{row.direction === "left" ? "row-1" : "row-2"}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+<style>
+  .media-ticker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    overflow: hidden;
+  }
+
+  .media-ticker__row {
+    overflow: hidden;
+  }
+
+  .media-ticker__track {
+    display: flex;
+    width: max-content;
+    gap: var(--space-2);
+    animation-name: ticker-scroll;
+    animation-duration: var(--ticker-duration, 40s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .media-ticker__row[data-direction="right"] .media-ticker__track {
+    animation-direction: reverse;
+  }
+
+  .media-ticker__tile {
+    flex: 0 0 auto;
+    height: 18rem;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .media-ticker__tile :global(img),
+  .media-ticker__tile video {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+
+  .media-ticker__tile--placeholder {
+    width: 20rem;
+    background: var(--color-grey950);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+    text-align: center;
+  }
+
+  .media-ticker__tile--placeholder span {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-small-regular-size);
+    color: var(--color-grey700);
+  }
+
+  @keyframes ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .media-ticker__track {
+      animation: none;
+    }
+  }
+</style>

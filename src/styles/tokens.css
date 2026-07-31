@@ -31,6 +31,7 @@
   --text-display-weight: 400;
   --text-display-size: 4.9375rem;
   --text-display-letter-spacing: normal;
+  --text-display-line-height: 1.1;
 
   --text-h1-font: var(--font-inter);
   --text-h1-weight: 400;
@@ -41,6 +42,11 @@
   --text-h2-weight: 600;
   --text-h2-size: 2.0625rem;
   --text-h2-letter-spacing: normal;
+
+  --text-section-heading-font: var(--font-radley);
+  --text-section-heading-weight: 400;
+  --text-section-heading-size: 3.9375rem;
+  --text-section-heading-letter-spacing: normal;
 
   --text-body-large-font: var(--font-inter);
   --text-body-large-weight: 500;
@@ -64,4 +70,12 @@
 
   /* Layout */
   --content-max-width: 72rem;
+
+  /* Semantic aliases */
+  --color-bg: var(--color-white);
+  --color-fg: var(--color-grey000);
+  --color-muted: var(--color-grey400);
+  --color-border: var(--color-grey925);
+  --font-sans: var(--font-inter);
+  --font-size-body: var(--text-body-regular-size);
 }
