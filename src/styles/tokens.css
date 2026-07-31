@@ -76,6 +76,7 @@
   --color-fg: var(--color-grey000);
   --color-muted: var(--color-grey400);
   --color-border: var(--color-grey925);
+  --color-nav-pill: rgba(255, 255, 255, 0.7);
   --font-sans: var(--font-inter);
   --font-size-body: var(--text-body-regular-size);
 }
