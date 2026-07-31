@@ -1,10 +1,18 @@
 :root {
   /* Colors */
-  --color-bg: #ffffff;
-  --color-fg: #111111;
-  --color-muted: #666666;
-  --color-accent: #ff4400;
-  --color-border: #e5e5e5;
+  --color-grey000: #2b2b2b;
+  --color-grey100: #3d3d3d;
+  --color-grey200: #4e4e4e;
+  --color-grey300: #606060;
+  --color-grey400: #727272;
+  --color-grey500: #838383;
+  --color-grey600: #959595;
+  --color-grey700: #adadad;
+  --color-grey800: #b8b8b8;
+  --color-grey900: #cacaca;
+  --color-grey925: #dcdcdc;
+  --color-grey950: #ededed;
+  --color-white: #ffffff;
 
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -15,11 +23,44 @@
   --space-6: 4rem;
 
   /* Typography */
-  --font-sans: "Sans", system-ui, sans-serif;
-  --font-mono: "Mono", ui-monospace, monospace;
-  --font-size-body: 1rem;
-  --font-size-h1: clamp(2.5rem, 5vw, 4.5rem);
-  --font-size-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --font-radley: "Radley", serif;
+  --font-inter: "Inter", system-ui, sans-serif;
+
+  /* Text styles */
+  --text-display-font: var(--font-radley);
+  --text-display-weight: 400;
+  --text-display-size: 4.9375rem;
+  --text-display-letter-spacing: normal;
+
+  --text-h1-font: var(--font-inter);
+  --text-h1-weight: 400;
+  --text-h1-size: 3rem;
+  --text-h1-letter-spacing: normal;
+
+  --text-h2-font: var(--font-inter);
+  --text-h2-weight: 600;
+  --text-h2-size: 2.0625rem;
+  --text-h2-letter-spacing: normal;
+
+  --text-body-large-font: var(--font-inter);
+  --text-body-large-weight: 500;
+  --text-body-large-size: 1.75rem;
+  --text-body-large-letter-spacing: normal;
+
+  --text-body-regular-font: var(--font-inter);
+  --text-body-regular-weight: 400;
+  --text-body-regular-size: 1.25rem;
+  --text-body-regular-letter-spacing: normal;
+
+  --text-body-bold-font: var(--font-inter);
+  --text-body-bold-weight: 600;
+  --text-body-bold-size: 1.25rem;
+  --text-body-bold-letter-spacing: normal;
+
+  --text-body-small-regular-font: var(--font-inter);
+  --text-body-small-regular-weight: 400;
+  --text-body-small-regular-size: 0.875rem;
+  --text-body-small-regular-letter-spacing: normal;
 
   /* Layout */
   --content-max-width: 72rem;
