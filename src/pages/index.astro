@@ -82,6 +82,7 @@ const services = [
       {caseStudies.map((study) => (
         <CaseStudyCard
           href={`${base}work/${study.slug}`}
+          slug={study.slug}
           title={study.title}
           year={study.year}
           tags={study.tags}

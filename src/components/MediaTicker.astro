@@ -48,7 +48,7 @@ const rows = [
           {[...row.items, ...row.items].map((item) => (
             <div class="media-ticker__tile">
               {item.type === "image" ? (
-                <Image src={item.src} alt="" />
+                <Image src={item.src} alt="" format="webp" quality={80} />
               ) : (
                 <video src={item.src} autoplay loop muted playsinline />
               )}
@@ -141,6 +141,16 @@ const rows = [
   @media (prefers-reduced-motion: reduce) {
     .media-ticker__track {
       animation: none;
+    }
+  }
+
+  @media (max-width: 56.25rem) {
+    .media-ticker__tile {
+      height: 12.5rem;
+    }
+
+    .media-ticker__tile--placeholder {
+      width: 14rem;
     }
   }
 </style>

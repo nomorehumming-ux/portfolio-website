@@ -19,7 +19,7 @@ const { services } = Astro.props;
     <li class="services-list__row">
       <h3 class="services-list__title">{service.title}</h3>
       <p class="services-list__description">{service.description}</p>
-      <Icon name={service.icon} size={32} />
+      <Icon name={service.icon} size={96} />
     </li>
   ))}
 </ul>
@@ -45,9 +45,11 @@ const { services } = Astro.props;
   }
 
   .services-list__title {
-    font-family: var(--font-inter);
-    font-weight: var(--text-body-bold-weight);
-    font-size: var(--text-body-regular-size);
+    font-family: var(--text-body-large-font);
+    font-weight: var(--text-body-large-weight);
+    font-size: var(--text-body-large-size);
+    letter-spacing: var(--text-body-large-letter-spacing);
+    line-height: var(--text-body-large-line-height);
     color: var(--color-fg);
   }
 

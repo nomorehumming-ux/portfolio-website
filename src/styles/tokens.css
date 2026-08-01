@@ -52,6 +52,7 @@
   --text-body-large-weight: 500;
   --text-body-large-size: 1.75rem;
   --text-body-large-letter-spacing: normal;
+  --text-body-large-line-height: 1.2;
 
   --text-body-regular-font: var(--font-inter);
   --text-body-regular-weight: 400;
