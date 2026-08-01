@@ -1,0 +1,53 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  alt?: string;
+}
+
+const { slug, name, alt = "" } = Astro.props;
+
+const videoModules = import.meta.glob<string>(
+  "../assets/motion/*/*.webm",
+  { eager: true, query: "?url", import: "default" },
+);
+
+const match = Object.entries(videoModules).find(([path]) => {
+  const fileName = path.split("/").pop()?.replace(/\.[^.]+$/, "");
+  return path.includes(`/${slug}/`) && fileName === name;
+});
+---
+
+{match ? (
+  <video class="motion-video" src={match[1]} autoplay loop muted playsinline aria-label={alt} />
+) : (
+  <div class="motion-video motion-video--placeholder" role="img" aria-label={alt || `${name} placeholder`}>
+    <span>Add {name}.webm to src/assets/motion/{slug}/</span>
+  </div>
+)}
+
+<style>
+  .motion-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  .motion-video--placeholder {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+    text-align: center;
+    background: var(--color-grey950);
+    border: 1px solid var(--color-border);
+  }
+
+  .motion-video--placeholder span {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-small-regular-size);
+    color: var(--color-grey700);
+  }
+</style>

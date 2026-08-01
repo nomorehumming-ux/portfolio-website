@@ -1,0 +1,103 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import MotionVideo from "../components/MotionVideo.astro";
+
+interface Props {
+  title: string;
+  subtitle: string;
+  year: string;
+  slug: string;
+  video: string;
+  alt?: string;
+  description?: string;
+  backHref: string;
+}
+
+const { title, subtitle, year, slug, video, alt, description, backHref } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Motion Design`} description={description ?? subtitle}>
+  <article class="motion-project">
+    <div class="motion-project__media">
+      <MotionVideo slug={slug} name={video} alt={alt ?? title} />
+    </div>
+
+    <div class="motion-project__row">
+      <div>
+        <h1 class="motion-project__title">{title}</h1>
+        <p class="motion-project__subtitle">{subtitle}</p>
+      </div>
+      <span class="motion-project__year">{year}</span>
+    </div>
+  </article>
+
+  <nav class="motion-project-nav" aria-label="Back to work">
+    <a class="motion-project-nav__link" href={backHref}>
+      <span aria-hidden="true">&larr;</span> Back to all
+    </a>
+  </nav>
+</BaseLayout>
+
+<style>
+  .motion-project {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: 120px var(--space-3) 0;
+  }
+
+  .motion-project__row {
+    margin-top: var(--space-4);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .motion-project__title {
+    font-family: var(--text-h2-font);
+    font-weight: var(--text-h2-weight);
+    font-size: var(--text-h2-size);
+    letter-spacing: var(--text-h2-letter-spacing);
+    color: var(--color-fg);
+  }
+
+  .motion-project__subtitle {
+    margin-top: var(--space-1);
+    font-family: var(--text-body-regular-font);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-muted);
+  }
+
+  .motion-project__year {
+    font-family: var(--text-body-regular-font);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-fg);
+    white-space: nowrap;
+  }
+
+  .motion-project-nav {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-3) var(--space-6);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .motion-project-nav__link {
+    font-family: var(--text-body-regular-font);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-fg);
+    text-decoration: none;
+  }
+
+  .motion-project-nav__link:hover {
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 48rem) {
+    .motion-project__row {
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+  }
+</style>

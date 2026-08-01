@@ -1,0 +1,92 @@
+---
+import CaseStudyImage from "./CaseStudyImage.astro";
+import MotionVideo from "./MotionVideo.astro";
+
+interface Props {
+  href: string;
+  slug: string;
+  image?: string;
+  video?: string;
+  alt?: string;
+  title: string;
+  subtitle: string;
+  year: string;
+}
+
+const { href, slug, image, video, alt = "", title, subtitle, year } = Astro.props;
+---
+
+<a class="work-card" href={href}>
+  <div class="work-card__thumb">
+    {video ? (
+      <MotionVideo slug={slug} name={video} alt={alt} />
+    ) : (
+      <CaseStudyImage slug={slug} name={image ?? ""} alt={alt} />
+    )}
+  </div>
+  <div class="work-card__row">
+    <h3 class="work-card__title">{title}</h3>
+    <span class="work-card__year">{year}</span>
+  </div>
+  <p class="work-card__subtitle">{subtitle}</p>
+</a>
+
+<style>
+  .work-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .work-card__thumb {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+  }
+
+  .work-card__thumb :global(.case-study-image),
+  .work-card__thumb :global(.case-study-image--placeholder),
+  .work-card__thumb :global(.motion-video),
+  .work-card__thumb :global(.motion-video--placeholder) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    border: none;
+  }
+
+  .work-card__row {
+    margin-top: var(--space-3);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .work-card__title {
+    font-family: var(--text-body-bold-font);
+    font-weight: var(--text-body-bold-weight);
+    font-size: var(--text-body-bold-size);
+    letter-spacing: var(--text-body-bold-letter-spacing);
+    color: var(--color-fg);
+  }
+
+  .work-card__year {
+    font-family: var(--text-body-regular-font);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-fg);
+    white-space: nowrap;
+  }
+
+  .work-card__subtitle {
+    margin-top: var(--space-1);
+    font-family: var(--text-body-regular-font);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-muted);
+  }
+
+  .work-card:hover .work-card__title {
+    color: var(--color-muted);
+  }
+</style>

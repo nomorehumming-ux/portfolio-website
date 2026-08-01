@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import WorkCard from "../../components/WorkCard.astro";
+
+const base = import.meta.env.BASE_URL;
+
+interface Project {
+  slug: string;
+  title: string;
+  subtitle: string;
+  year: string;
+  image?: string;
+  video?: string;
+  alt: string;
+}
+
+const projects: Project[] = [
+  {
+    slug: "case-study-2",
+    title: "Autotag",
+    subtitle: "Talebook",
+    year: "2023",
+    image: "talebookAutotag",
+    alt: "Browser mockup of the Talebook usability study screen with the Autotag sidebar",
+  },
+  {
+    slug: "case-study-3",
+    title: "Comm-Bud",
+    subtitle: "Hackathon 'Build the Beauty'",
+    year: "2023",
+    image: "commBud",
+    alt: "Three phone mockups of the Comm Bud contractor profile and booking confirmation screens on a green background",
+  },
+  {
+    slug: "kineto-branding-presentation",
+    title: "Kineto branding presentation",
+    subtitle: "Kineto",
+    year: "2026",
+    video: "kineto-branding-presentation",
+    alt: "Kineto brand identity motion presentation",
+  },
+  {
+    slug: "cubic-loader",
+    title: "Cubic loader",
+    subtitle: "Personal work",
+    year: "2026",
+    video: "cubic-loader",
+    alt: "Looping isometric cube loader animation",
+  },
+  {
+    slug: "case-study-1",
+    title: "March for Science",
+    subtitle: "Foundation of Digital Competences",
+    year: "2024",
+    image: "marchForScience",
+    alt: "Screenshot of the redesigned March for Science Foundation website homepage",
+  },
+];
+---
+
+<BaseLayout
+  title="Work — Bartek Dzięgiel"
+  description="Selected case studies in product design, UX, and branding."
+>
+  <section class="work-hero">
+    <h1 class="work-hero__title">Work</h1>
+  </section>
+
+  <section class="work-grid">
+    {projects.map((project) => (
+      <WorkCard
+        href={`${base}/work/${project.slug}`}
+        slug={project.slug}
+        image={project.image}
+        video={project.video}
+        alt={project.alt}
+        title={project.title}
+        subtitle={project.subtitle}
+        year={project.year}
+      />
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .work-hero {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: 120px var(--space-3) var(--space-5);
+  }
+
+  .work-hero__title {
+    font-family: var(--text-display-font);
+    font-weight: var(--text-display-weight);
+    font-size: var(--text-display-size);
+    letter-spacing: var(--text-display-letter-spacing);
+    line-height: var(--text-display-line-height);
+    color: var(--color-fg);
+  }
+
+  .work-grid {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: 0 var(--space-3) var(--space-6);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 64rem) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .work-hero__title {
+      font-size: 2.5rem;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
