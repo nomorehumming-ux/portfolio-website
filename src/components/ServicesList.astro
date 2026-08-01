@@ -54,9 +54,12 @@ const { services } = Astro.props;
   }
 
   .services-list__description {
-    font-family: var(--font-inter);
-    font-size: var(--text-body-small-regular-size);
-    color: var(--color-muted);
+    font-family: var(--text-body-regular-font);
+    font-weight: var(--text-body-regular-weight);
+    font-size: var(--text-body-regular-size);
+    letter-spacing: var(--text-body-regular-letter-spacing);
+    line-height: var(--text-body-regular-line-height);
+    color: var(--color-fg);
   }
 
   @media (max-width: 48rem) {

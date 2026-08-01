@@ -47,6 +47,7 @@
   --text-section-heading-weight: 400;
   --text-section-heading-size: 3.9375rem;
   --text-section-heading-letter-spacing: normal;
+  --text-section-heading-line-height: 1.1;
 
   --text-body-large-font: var(--font-inter);
   --text-body-large-weight: 500;
@@ -58,6 +59,7 @@
   --text-body-regular-weight: 400;
   --text-body-regular-size: 1.25rem;
   --text-body-regular-letter-spacing: normal;
+  --text-body-regular-line-height: 1.6;
 
   --text-body-bold-font: var(--font-inter);
   --text-body-bold-weight: 600;
