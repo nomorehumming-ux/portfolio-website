@@ -1,5 +1,6 @@
 ---
 const year = new Date().getFullYear();
+const email = "no.more.humming@gmail.com";
 
 const socials = [
   { href: "https://www.behance.net/", label: "Behance" },
@@ -8,11 +9,16 @@ const socials = [
 ];
 ---
 
+<section class="contact" id="contact">
+  <h2 class="contact__heading">Get in touch</h2>
+  <a class="contact__email" href={`mailto:${email}`}>{email}</a>
+</section>
+
 <div class="back-to-top-wrap">
   <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">&uarr;</span></a>
 </div>
 
-<footer class="footer" id="contact">
+<footer class="footer">
   <p class="footer__copy">&copy; {year} Bartek Dzięgiel.</p>
   <ul class="footer__socials">
     {socials.map((social) => (
@@ -22,6 +28,37 @@ const socials = [
 </footer>
 
 <style>
+  .contact {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: var(--space-6) var(--space-3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .contact__heading {
+    font-family: var(--text-section-heading-font);
+    font-weight: var(--text-section-heading-weight);
+    font-size: var(--text-section-heading-size);
+    letter-spacing: var(--text-section-heading-letter-spacing);
+    line-height: var(--text-section-heading-line-height);
+    color: var(--color-fg);
+  }
+
+  .contact__email {
+    font-family: var(--font-inter);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-fg);
+    text-decoration: none;
+  }
+
+  .contact__email:hover {
+    color: var(--color-muted);
+  }
+
   .back-to-top-wrap {
     max-width: var(--content-max-width);
     margin-inline: auto;

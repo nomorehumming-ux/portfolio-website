@@ -15,6 +15,7 @@ const caseStudies = [
     tags: ["Product design", "UI/UX", "User research"],
     description:
       "This project involved redesign of the 'March for Science Foundation' website, a non-profit organization dedicated to promoting science. Our work was a volunteer effort as part of the larger 'Strona od Nowa' initiative.",
+    image: "marchForScience",
   },
   {
     slug: "case-study-2",
@@ -23,6 +24,7 @@ const caseStudies = [
     tags: ["Product design", "UI/UX", "User research"],
     description:
       "Autotag is a feature for Talebook, an interactive research repository platform. It automatically attributes tags to the pieces of data researchers collected during the user research study.",
+    image: "talebookAutotag",
   },
   {
     slug: "case-study-3",
@@ -31,6 +33,7 @@ const caseStudies = [
     tags: ["Product design", "UI/UX", "User research"],
     description:
       "Comm-Bud app makes finding a contractor for a construction project easier. This product was designed during a hackathon Build the Beaty, organized by L'Oreal, Saint-Gobain, and Generator Pomysłów. The app received a 3rd award in the hackathon contest.",
+    image: "commBud",
   },
 ];
 
@@ -87,6 +90,7 @@ const services = [
           year={study.year}
           tags={study.tags}
           description={study.description}
+          image={study.image}
         />
       ))}
     </div>

@@ -1,7 +1,58 @@
 ---
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseStudySection from "../../components/CaseStudySection.astro";
+import CaseStudyImage from "../../components/CaseStudyImage.astro";
+
+const base = import.meta.env.BASE_URL;
+const slug = "case-study-1";
 ---
 
-<CaseStudyLayout title="Case Study 1" role="Role" year="2026">
-  <p>Case study content goes here.</p>
+<CaseStudyLayout
+  title="March for Science"
+  description="This project involved redesign of the 'March for Science Foundation' website, a non-profit organization dedicated to promoting science. Established in 2019, the foundation was inspired by a movement that began in the USA in 2017. Our work was a volunteer effort as part of the larger 'Strona od Nowa' initiative."
+  problem="The foundation's existing website suffered from an outdated design and confusing information architecture. This significantly hindered its ability to effectively engage its audience and promote its mission."
+  solution="Our solution was to redesign the website with a modern visual style and intuitive information architecture, creating a platform that would better represent the foundation's mission and resonate with its audience."
+  slug={slug}
+  heroImage="marchForScience"
+  heroAlt="Screenshot of the redesigned March for Science Foundation website homepage"
+  liveUrl="https://marszdlanauki.pl/"
+  prev={{ href: `${base}work/case-study-3`, label: "Comm Bud" }}
+  next={{ href: `${base}work/case-study-2`, label: "Talebook Autotag" }}
+>
+  <CaseStudySection
+    heading="Initial exploration"
+    paragraphs={[
+      "Our process began with a deep dive into the foundation's needs. We conducted an in-depth interview with the foundation's director to align on the new website's goals and stylistic preferences.",
+      "Our team performed a competitive analysis of other charity websites to identify effective design patterns. We also conducted usability tests on the old site to pinpoint its shortcomings and interviewed potential users to understand their specific needs and goals.",
+    ]}
+    mediaColumns={2}
+  >
+    <CaseStudyImage slug={slug} name="initial-exploration-1" alt="Mockup of the previous marches and latest posts sections on the old site" />
+    <CaseStudyImage slug={slug} name="initial-exploration-2" alt="Competitive analysis spreadsheet of other charity websites" />
+  </CaseStudySection>
+
+  <CaseStudySection
+    heading="Information Architecture"
+    paragraphs={[
+      "To lay the groundwork for a new site structure, we performed a comprehensive content audit of the existing website and synthesized content requirements from our stakeholder interviews.",
+      "In a collaborative workshop, we used a card-sorting method to develop a new, improved information architecture.",
+    ]}
+  >
+    <CaseStudyImage slug={slug} name="information-architecture" alt="Card sorting board used to develop the new information architecture" />
+  </CaseStudySection>
+
+  <CaseStudySection
+    heading="Visual Identity & Design"
+    paragraphs={[
+      "With only the existing logo and brand colors provided, we built the new visual identity. We selected the modern Manrope font to complement the logo and established a refined color palette of black, turquoise, navy blue, and red.",
+      "The design process followed a \"graceful degradation\" approach, where we first designed the desktop version before adapting it for mobile. We created detailed technical documentation for developers, outlining the behaviour of each website element.",
+    ]}
+    mediaColumns={2}
+  >
+    <CaseStudyImage slug={slug} name="visual-identity-1" alt="Grid of desktop screen designs showing the new visual identity" />
+    <CaseStudyImage slug={slug} name="visual-identity-2" alt="Grid of mobile screen designs showing the new visual identity" />
+    <div class="case-study-media__full">
+      <CaseStudyImage slug={slug} name="visual-identity-3" alt="Mobile phone mockups of the redesigned website on a blue background" />
+    </div>
+  </CaseStudySection>
 </CaseStudyLayout>

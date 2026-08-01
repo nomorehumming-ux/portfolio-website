@@ -1,0 +1,21 @@
+---
+interface Props {
+  heading: string;
+  paragraphs: string[];
+  mediaColumns?: 1 | 2;
+}
+
+const { heading, paragraphs, mediaColumns = 1 } = Astro.props;
+---
+
+<section class="case-study-section">
+  <h3 class="case-study-heading">{heading}</h3>
+  <div class="case-study-text">
+    {paragraphs.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
+  </div>
+  <div class="case-study-media" data-columns={mediaColumns}>
+    <slot />
+  </div>
+</section>

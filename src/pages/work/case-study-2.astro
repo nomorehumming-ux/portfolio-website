@@ -1,7 +1,81 @@
 ---
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseStudySection from "../../components/CaseStudySection.astro";
+import CaseStudyImage from "../../components/CaseStudyImage.astro";
+
+const base = import.meta.env.BASE_URL;
+const slug = "case-study-2";
 ---
 
-<CaseStudyLayout title="Case Study 2" role="Role" year="2026">
-  <p>Case study content goes here.</p>
+<CaseStudyLayout
+  title="Talebook Autotag"
+  description="Autotag is a feature for Talebook, an interactive research repository platform. It automatically attributes tags to the pieces of data researchers collected during the research study."
+  problem="Qualitative data collected during user research must be analyzed by UX researchers in order to provide actionable insights. The process of &quot;tagging&quot; (or &quot;coding&quot;) is an integral part of thematic analysis. This part of the analysis is time- and energy-consuming for many researchers."
+  solution="Designing a feature for Talebook, an interactive research repository, that employs an AI assistant for the process of coding."
+  slug={slug}
+  heroImage="talebookAutotag"
+  heroAlt="Browser mockup of the Talebook usability study screen with the Autotag sidebar"
+  prev={{ href: `${base}work/case-study-1`, label: "March for Science" }}
+  next={{ href: `${base}work/case-study-3`, label: "Comm Bud" }}
+>
+  <CaseStudySection
+    heading="Project background"
+    paragraphs={[
+      "A starting point for the design process was the following user story: \"As a UX researcher, I want to be able to use AI to automatically attribute tags to the data I collected, so I would save time and energy.\"",
+    ]}
+  >
+    <CaseStudyImage slug={slug} name="project-background" alt="Recorded user interview video call" />
+  </CaseStudySection>
+
+  <CaseStudySection
+    heading="Discovery phase"
+    paragraphs={[
+      "Interviews revealed that how researchers approach thematic analysis varies among researchers. Some researchers like to start from detailed information and create clusters of similar observations, others tend to categorize observations into predetermined sets of tags.",
+      "Moreover, study participants shared two main concerns with using AI: data privacy and AI accuracy. Discovery interviews prompted the development of several sub-features, which addressed the discovered user needs.",
+    ]}
+  >
+    <CaseStudyImage slug={slug} name="discovery-phase" alt="User stories table listing goals and occurrence percentages" />
+  </CaseStudySection>
+
+  <CaseStudySection
+    heading="Defining features"
+    paragraphs={[
+      "The sub-features were prioritized using a Weighted Scoring Prioritization framework. The final score of each sub-feature informed its position in the sidebar.",
+      "To address privacy concerns, a \"data privacy vault\" should be used. It identifies and masks sensitive information. To address accuracy, users can create precise prompts to guide the AI, building trust in its results.",
+    ]}
+    mediaColumns={2}
+  >
+    <CaseStudyImage slug={slug} name="defining-features-1" alt="Weighted scoring prioritization table for sub-features" />
+    <CaseStudyImage slug={slug} name="defining-features-2" alt="Data privacy vault flow diagram" />
+  </CaseStudySection>
+
+  <section class="case-study-section">
+    <h3 class="case-study-heading">Design</h3>
+    <div class="case-study-text">
+      <p>The AI assistant is placed in the sidebar and provides two main functions: summaries & auto-tagging. The tagging section lets researchers specify research goals and upload pre-defined tags.</p>
+    </div>
+    <div class="case-study-media">
+      <CaseStudyImage slug={slug} name="design-1" alt="Initial UI exploration grid of sidebar design variants" />
+    </div>
+    <div class="case-study-text">
+      <p>During initial UI exploration sidebar was selected over the fixed, floating dialog box, based on conducted A/B tests. The visual design fits the fixed UI of the Talebook application.</p>
+    </div>
+    <div class="case-study-media">
+      <CaseStudyImage slug={slug} name="design-2" alt="AI assistant sidebar mockup on an orange background" />
+    </div>
+    <div class="case-study-media" data-columns="2">
+      <CaseStudyImage slug={slug} name="design-3" alt="AI assistant sidebar summaries screen on an orange background" />
+      <CaseStudyImage slug={slug} name="design-4" alt="AI assistant sidebar autotag screen on an orange background" />
+    </div>
+    <div class="case-study-media">
+      <CaseStudyImage slug={slug} name="design-5" alt="Final usability study screen with the Autotag sidebar" />
+    </div>
+  </section>
+
+  <CaseStudySection
+    heading="Outcomes"
+    paragraphs={[
+      "Talebook Autotag makes life easier for UX researchers. They can upload their study reports into Talebook and then use the Autotag feature to automatically assign tags to relevant text snippets. These tags can then be organized into custom categories generated by the AI assistant, making it easy to organize and analyze the findings.",
+    ]}
+  />
 </CaseStudyLayout>

@@ -1,51 +1,245 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import CaseStudyImage from "../components/CaseStudyImage.astro";
+
+interface StudyLink {
+  href: string;
+  label: string;
+}
 
 interface Props {
   title: string;
   description?: string;
-  role?: string;
-  year?: string;
+  problem?: string;
+  solution?: string;
+  slug?: string;
+  heroImage?: string;
+  heroAlt?: string;
+  liveUrl?: string;
+  prev?: StudyLink;
+  next?: StudyLink;
 }
 
-const { title, description, role, year } = Astro.props;
+const {
+  title,
+  description,
+  problem,
+  solution,
+  slug,
+  heroImage,
+  heroAlt,
+  liveUrl,
+  prev,
+  next,
+} = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={`${title} — Case Study`} description={description}>
   <article class="case-study">
     <header class="case-study__header">
-      <h1>{title}</h1>
-      {(role || year) && (
-        <p class="case-study__meta">
-          {role}
-          {role && year && " · "}
-          {year}
-        </p>
+      <h1 class="case-study__title">{title}</h1>
+
+      {(description || problem || solution) && (
+        <div class="case-study__intro">
+          {description && <p class="case-study__description">{description}</p>}
+
+          {(problem || solution) && (
+            <div class="case-study__problem-solution">
+              {problem && (
+                <div class="case-study__intro-col">
+                  <h2 class="case-study__intro-heading">Problem</h2>
+                  <p>{problem}</p>
+                </div>
+              )}
+
+              {solution && (
+                <div class="case-study__intro-col">
+                  <h2 class="case-study__intro-heading">Solution</h2>
+                  <p>{solution}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       )}
     </header>
+
+    {slug && heroImage && (
+      <div class="case-study__hero">
+        <CaseStudyImage slug={slug} name={heroImage} alt={heroAlt ?? ""} />
+      </div>
+    )}
 
     <div class="case-study__body">
       <slot />
     </div>
+
+    {liveUrl && (
+      <p class="case-study__live">
+        The new, redesigned website is now available at{" "}
+        <a href={liveUrl} target="_blank" rel="noopener noreferrer">{liveUrl}</a>
+      </p>
+    )}
   </article>
+
+  {(prev || next) && (
+    <nav class="case-study-nav" aria-label="Other case studies">
+      <h2 class="case-study-nav__heading">See other projects</h2>
+      <div class="case-study-nav__links">
+        {prev ? (
+          <a class="case-study-nav__link case-study-nav__link--prev" href={prev.href}>
+            <span aria-hidden="true">&larr;</span> {prev.label}
+          </a>
+        ) : <span />}
+        {next && (
+          <a class="case-study-nav__link case-study-nav__link--next" href={next.href}>
+            {next.label} <span aria-hidden="true">&rarr;</span>
+          </a>
+        )}
+      </div>
+    </nav>
+  )}
 </BaseLayout>
 
 <style>
   .case-study {
     max-width: var(--content-max-width);
     margin-inline: auto;
-    padding: var(--space-5) var(--space-3);
+    padding: 12.5rem var(--space-3) 0;
   }
 
-  .case-study__meta {
-    color: var(--color-muted);
-    margin-top: var(--space-2);
+  .case-study__title {
+    font-family: var(--text-display-font);
+    font-weight: var(--text-display-weight);
+    font-size: var(--text-display-size);
+    letter-spacing: var(--text-display-letter-spacing);
+    line-height: var(--text-display-line-height);
+    color: var(--color-fg);
   }
 
-  .case-study__body {
-    margin-top: var(--space-5);
+  .case-study__intro {
+    margin-top: var(--space-4);
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+  }
+
+  .case-study__description {
+    max-width: calc(50% - var(--space-4) / 2);
+    font-family: var(--text-body-regular-font);
+    font-weight: var(--text-body-regular-weight);
+    font-size: var(--text-body-regular-size);
+    letter-spacing: var(--text-body-regular-letter-spacing);
+    line-height: var(--text-body-regular-line-height);
+    color: var(--color-fg);
+  }
+
+  .case-study__problem-solution {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .case-study__intro-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .case-study__intro-heading {
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--text-body-large-font);
+    font-weight: var(--text-body-large-weight);
+    font-size: var(--text-body-large-size);
+    letter-spacing: var(--text-body-large-letter-spacing);
+    line-height: var(--text-body-large-line-height);
+    color: var(--color-fg);
+  }
+
+  .case-study__intro-col p {
+    font-family: var(--text-body-regular-font);
+    font-weight: var(--text-body-regular-weight);
+    font-size: var(--text-body-regular-size);
+    letter-spacing: var(--text-body-regular-letter-spacing);
+    line-height: var(--text-body-regular-line-height);
+    color: var(--color-fg);
+  }
+
+  .case-study__hero {
+    margin-top: var(--space-6);
+  }
+
+  .case-study__body {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .case-study__live {
+    margin-top: var(--space-6);
+    font-family: var(--text-body-regular-font);
+    font-weight: var(--text-body-regular-weight);
+    font-size: var(--text-body-regular-size);
+    letter-spacing: var(--text-body-regular-letter-spacing);
+    line-height: var(--text-body-regular-line-height);
+    color: var(--color-fg);
+  }
+
+  .case-study__live a {
+    color: var(--color-fg);
+  }
+
+  .case-study-nav {
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    margin-top: var(--space-6);
+    padding: var(--space-4) var(--space-3) var(--space-5);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .case-study-nav__heading {
+    font-family: var(--text-body-large-font);
+    font-weight: var(--text-body-large-weight);
+    font-size: var(--text-body-large-size);
+    letter-spacing: var(--text-body-large-letter-spacing);
+    line-height: var(--text-body-large-line-height);
+    color: var(--color-fg);
+  }
+
+  .case-study-nav__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .case-study-nav__link {
+    font-family: var(--text-body-regular-font);
+    font-size: var(--text-body-regular-size);
+    color: var(--color-fg);
+    text-decoration: none;
+  }
+
+  .case-study-nav__link:hover {
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 48rem) {
+    .case-study__title {
+      font-size: 2.5rem;
+    }
+
+    .case-study__problem-solution {
+      grid-template-columns: 1fr;
+    }
+
+    .case-study__description {
+      max-width: none;
+    }
   }
 </style>

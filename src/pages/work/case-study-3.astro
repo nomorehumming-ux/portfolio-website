@@ -1,7 +1,59 @@
 ---
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import CaseStudyImage from "../../components/CaseStudyImage.astro";
+
+const base = import.meta.env.BASE_URL;
+const slug = "case-study-3";
 ---
 
-<CaseStudyLayout title="Case Study 3" role="Role" year="2026">
-  <p>Case study content goes here.</p>
+<CaseStudyLayout
+  title="Comm Bud"
+  description="Comm Bud app makes finding a contractor for a construction project easier. My team designed this product during a hackathon Build the Beauty, organized by L'Oreal, Saint-Gobain, and Generator Pomysłów. The app received a 3rd award in the hackathon contest."
+  problem="How to streamline the construction process for private investors, while promoting sustainable development practices?"
+  solution="An app that connects investors with potential contractors."
+  slug={slug}
+  heroImage="commBud"
+  heroAlt="Three phone mockups of the Comm Bud contractor profile and booking confirmation screens on a green background"
+  prev={{ href: `${base}work/case-study-2`, label: "Talebook Autotag" }}
+  next={{ href: `${base}work/case-study-1`, label: "March for Science" }}
+>
+  <section class="case-study-section">
+    <h3 class="case-study-heading">Research</h3>
+    <div class="case-study-text">
+      <p>During the hackathon, we conducted interviews with private investors to learn about the pain points and frustration during the construction process.</p>
+      <p>Based on their feedback and the hackathon challenge we developed a persona that guided the rest of the design process.</p>
+    </div>
+    <div class="case-study-media" data-columns="2">
+      <CaseStudyImage slug={slug} name="research-1" alt="Persona card for a private investor, listing goals and frustrations" />
+      <CaseStudyImage slug={slug} name="research-2" alt="FigJam board synthesizing investor interview notes" />
+    </div>
+  </section>
+
+  <section class="case-study-section">
+    <h3 class="case-study-heading">Ideation</h3>
+    <div class="case-study-text">
+      <p>Through both individual and collective brainstorming sessions, we explored numerous solution ideas. We selected one idea by using a prioritization matrix.</p>
+      <p>The solution to the discovered issues was an app helping investors connect with potential contractors, aiming to address communication issues, unexpected delays, and accountability concerns in construction projects.</p>
+    </div>
+    <div class="case-study-media" data-columns="2">
+      <CaseStudyImage slug={slug} name="ideation-1" alt="Affinity diagram clustering brainstormed solution ideas" />
+      <CaseStudyImage slug={slug} name="ideation-2" alt="Prioritization matrix plotting solution ideas" />
+    </div>
+  </section>
+
+  <section class="case-study-section">
+    <h3 class="case-study-heading">Design</h3>
+    <div class="case-study-text">
+      <p>It includes a rating system reflecting contractors' sustainable practices, providing valuable information for investors, and promoting sustainable development.</p>
+    </div>
+    <div class="case-study-media">
+      <CaseStudyImage slug={slug} name="design-1" alt="Booking calendar and schedule screens on a green background" />
+    </div>
+    <div class="case-study-media">
+      <CaseStudyImage slug={slug} name="design-2" alt="Three phone mockups of contractor profile states on a green background" />
+    </div>
+    <div class="case-study-media">
+      <CaseStudyImage slug={slug} name="design-3" alt="Composite showcase of the Comm Bud app screens on a green background" />
+    </div>
+  </section>
 </CaseStudyLayout>

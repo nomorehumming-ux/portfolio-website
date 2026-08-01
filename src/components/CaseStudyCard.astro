@@ -9,19 +9,27 @@ interface Props {
   year: string;
   tags: string[];
   description: string;
+  image?: string;
 }
 
-const { href, slug, title, year, tags, description } = Astro.props;
+const { href, slug, title, year, tags, description, image } = Astro.props;
 
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/images/case-study-*/*.{jpg,jpeg,png,webp,gif,svg}",
   { eager: true },
 );
 
+const slugImages = Object.entries(imageModules)
+  .filter(([path]) => path.includes(`/${slug}/`))
+  .sort(([a], [b]) => a.localeCompare(b));
+
 const [, firstImage] =
-  Object.entries(imageModules)
-    .filter(([path]) => path.includes(`/${slug}/`))
-    .sort(([a], [b]) => a.localeCompare(b))[0] ?? [];
+  (image
+    ? slugImages.find(([path]) => {
+        const fileName = path.split("/").pop()?.replace(/\.[^.]+$/, "");
+        return fileName === image;
+      })
+    : slugImages[0]) ?? [];
 ---
 
 <article class="case-study-card">
