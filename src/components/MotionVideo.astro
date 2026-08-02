@@ -19,7 +19,7 @@ const match = Object.entries(videoModules).find(([path]) => {
 ---
 
 {match ? (
-  <video class="motion-video" src={match[1]} autoplay loop muted playsinline aria-label={alt} />
+  <video class="motion-video" src={match[1]} autoplay loop muted playsinline preload="auto" aria-label={alt} />
 ) : (
   <div class="motion-video motion-video--placeholder" role="img" aria-label={alt || `${name} placeholder`}>
     <span>Add {name}.webm to src/assets/motion/{slug}/</span>

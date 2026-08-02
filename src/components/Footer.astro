@@ -112,4 +112,12 @@ const socials = [
   .footer__socials a:hover {
     color: var(--color-fg);
   }
+
+  @media (max-width: 48rem) {
+    .footer {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+  }
 </style>
