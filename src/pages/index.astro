@@ -94,6 +94,9 @@ const services = [
         />
       ))}
     </div>
+    <div class="selected-work__all-wrap">
+      <a class="selected-work__all-link" href={`${base}/work`}>All work <span aria-hidden="true">&rarr;</span></a>
+    </div>
   </section>
 
   <section class="services">
@@ -130,6 +133,25 @@ const services = [
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
+  }
+
+  .selected-work__all-wrap {
+    margin-top: var(--space-5);
+    text-align: right;
+  }
+
+  .selected-work__all-link {
+    font-family: var(--text-body-regular-font);
+    font-weight: var(--text-body-regular-weight);
+    font-size: var(--text-body-regular-size);
+    letter-spacing: var(--text-body-regular-letter-spacing);
+    line-height: var(--text-body-regular-line-height);
+    color: var(--color-fg);
+    text-decoration: none;
+  }
+
+  .selected-work__all-link:hover {
+    color: var(--color-muted);
   }
 
   .services .services-list {
