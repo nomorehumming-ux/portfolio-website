@@ -1,23 +1,17 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import CaseStudyImage from "../components/CaseStudyImage.astro";
-
-interface StudyLink {
-  href: string;
-  label: string;
-}
+import ProjectNav from "../components/ProjectNav.astro";
 
 interface Props {
   title: string;
   description?: string;
   problem?: string;
   solution?: string;
-  slug?: string;
+  slug: string;
   heroImage?: string;
   heroAlt?: string;
   liveUrl?: string;
-  prev?: StudyLink;
-  next?: StudyLink;
 }
 
 const {
@@ -29,8 +23,6 @@ const {
   heroImage,
   heroAlt,
   liveUrl,
-  prev,
-  next,
 } = Astro.props;
 ---
 
@@ -82,23 +74,7 @@ const {
     )}
   </article>
 
-  {(prev || next) && (
-    <nav class="case-study-nav" aria-label="Other case studies">
-      <h2 class="case-study-nav__heading">See other projects</h2>
-      <div class="case-study-nav__links">
-        {prev ? (
-          <a class="case-study-nav__link case-study-nav__link--prev" href={prev.href}>
-            <span aria-hidden="true">&larr;</span> {prev.label}
-          </a>
-        ) : <span />}
-        {next && (
-          <a class="case-study-nav__link case-study-nav__link--next" href={next.href}>
-            {next.label} <span aria-hidden="true">&rarr;</span>
-          </a>
-        )}
-      </div>
-    </nav>
-  )}
+  <ProjectNav slug={slug} />
 </BaseLayout>
 
 <style>
@@ -189,44 +165,6 @@ const {
 
   .case-study__live a {
     color: var(--color-fg);
-  }
-
-  .case-study-nav {
-    max-width: var(--content-max-width);
-    margin-inline: auto;
-    margin-top: var(--space-6);
-    padding: var(--space-4) var(--space-3) var(--space-5);
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .case-study-nav__heading {
-    font-family: var(--text-body-large-font);
-    font-weight: var(--text-body-large-weight);
-    font-size: var(--text-body-large-size);
-    letter-spacing: var(--text-body-large-letter-spacing);
-    line-height: var(--text-body-large-line-height);
-    color: var(--color-fg);
-  }
-
-  .case-study-nav__links {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-  }
-
-  .case-study-nav__link {
-    font-family: var(--text-body-regular-font);
-    font-size: var(--text-body-regular-size);
-    color: var(--color-fg);
-    text-decoration: none;
-  }
-
-  .case-study-nav__link:hover {
-    color: var(--color-muted);
   }
 
   @media (max-width: 48rem) {

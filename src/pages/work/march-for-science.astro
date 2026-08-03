@@ -3,7 +3,6 @@ import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
 import CaseStudySection from "../../components/CaseStudySection.astro";
 import CaseStudyImage from "../../components/CaseStudyImage.astro";
 
-const base = import.meta.env.BASE_URL;
 const slug = "march-for-science";
 ---
 
@@ -16,8 +15,6 @@ const slug = "march-for-science";
   heroImage="marchForScience"
   heroAlt="Screenshot of the redesigned March for Science Foundation website homepage"
   liveUrl="https://marszdlanauki.pl/"
-  prev={{ href: `${base}/work/comm-bud`, label: "Comm Bud" }}
-  next={{ href: `${base}/work/talebook-autotag`, label: "Talebook Autotag" }}
 >
   <CaseStudySection
     heading="Initial exploration"
