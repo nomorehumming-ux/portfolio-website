@@ -8,6 +8,25 @@ interface Props {
 
 const { speedSeconds = 40 } = Astro.props;
 
+const base = import.meta.env.BASE_URL;
+
+// A ticker file whose name starts with one of these slugs links to that project's page.
+// Sorted longest-first so no slug can shadow a longer one that shares its prefix.
+const projectSlugs = [
+  "march-for-science",
+  "talebook-autotag",
+  "comm-bud",
+  "cubic-loader",
+  "kineto-branding-presentation",
+  "money-float",
+].sort((a, b) => b.length - a.length);
+
+function projectHref(path: string): string | undefined {
+  const name = path.split("/").pop() ?? "";
+  const slug = projectSlugs.find((s) => name.startsWith(s));
+  return slug ? `${base}/work/${slug}` : undefined;
+}
+
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/images/ticker/row-*/*.{jpg,jpeg,png,webp,gif,svg}",
   { eager: true },
@@ -18,16 +37,16 @@ const videoModules = import.meta.glob<string>(
 );
 
 type TickerItem =
-  | { type: "image"; path: string; src: ImageMetadata }
-  | { type: "video"; path: string; src: string };
+  | { type: "image"; path: string; src: ImageMetadata; href?: string }
+  | { type: "video"; path: string; src: string; href?: string };
 
 function rowItems(row: "row-1" | "row-2"): TickerItem[] {
   const images: TickerItem[] = Object.entries(imageModules)
     .filter(([path]) => path.includes(`/ticker/${row}/`))
-    .map(([path, mod]) => ({ type: "image", path, src: mod.default }));
+    .map(([path, mod]) => ({ type: "image", path, src: mod.default, href: projectHref(path) }));
   const videos: TickerItem[] = Object.entries(videoModules)
     .filter(([path]) => path.includes(`/ticker/${row}/`))
-    .map(([path, src]) => ({ type: "video", path, src }));
+    .map(([path, src]) => ({ type: "video", path, src, href: projectHref(path) }));
   return [...images, ...videos].sort((a, b) => a.path.localeCompare(b.path));
 }
 
@@ -45,15 +64,25 @@ const rows = [
           class="media-ticker__track"
           style={`--ticker-duration: ${speedSeconds}s`}
         >
-          {[...row.items, ...row.items].map((item) => (
-            <div class="media-ticker__tile">
-              {item.type === "image" ? (
-                <Image src={item.src} alt="" format="webp" quality={80} />
-              ) : (
-                <video src={item.src} autoplay loop muted playsinline preload="auto" />
-              )}
-            </div>
-          ))}
+          {[...row.items, ...row.items].map((item) =>
+            item.href ? (
+              <a class="media-ticker__tile media-ticker__tile--linked" href={item.href}>
+                {item.type === "image" ? (
+                  <Image src={item.src} alt="" format="webp" quality={80} />
+                ) : (
+                  <video src={item.src} autoplay loop muted playsinline preload="auto" />
+                )}
+              </a>
+            ) : (
+              <div class="media-ticker__tile">
+                {item.type === "image" ? (
+                  <Image src={item.src} alt="" format="webp" quality={80} />
+                ) : (
+                  <video src={item.src} autoplay loop muted playsinline preload="auto" />
+                )}
+              </div>
+            ),
+          )}
         </div>
       ) : (
         <div class="media-ticker__track media-ticker__track--placeholder">
@@ -103,6 +132,15 @@ const rows = [
     height: 18rem;
     overflow: hidden;
     border-radius: 16px;
+  }
+
+  a.media-ticker__tile--linked {
+    display: block;
+    transition: opacity 0.2s ease;
+  }
+
+  a.media-ticker__tile--linked:hover {
+    opacity: 0.85;
   }
 
   .media-ticker__tile :global(img),

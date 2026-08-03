@@ -11,7 +11,7 @@ interface Props {
 const { slug, name, alt = "" } = Astro.props;
 
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/images/case-study-*/*.{jpg,jpeg,png,webp,gif,svg}",
+  "../assets/images/*/*.{jpg,jpeg,png,webp,gif,svg}",
   { eager: true },
 );
 
