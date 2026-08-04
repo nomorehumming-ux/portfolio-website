@@ -5,6 +5,10 @@ export interface Project {
   year: string;
   image?: string;
   video?: string;
+  /** Alternate image used as the Work grid cover instead of `image`, when set. */
+  coverImage?: string;
+  /** Lighter video used as the Work grid cover instead of `video`, when set. */
+  coverVideo?: string;
   alt: string;
 }
 
@@ -15,6 +19,7 @@ export const projects: Project[] = [
     subtitle: "Talebook",
     year: "2023",
     image: "talebookAutotag",
+    coverImage: "talebook-autotag-cover",
     alt: "Browser mockup of the Talebook usability study screen with the Autotag sidebar",
   },
   {
@@ -23,6 +28,7 @@ export const projects: Project[] = [
     subtitle: "Hackathon 'Build the Beauty'",
     year: "2023",
     image: "commBud",
+    coverImage: "comm-bud-cover",
     alt: "Three phone mockups of the Comm Bud contractor profile and booking confirmation screens on a green background",
   },
   {
@@ -31,6 +37,7 @@ export const projects: Project[] = [
     subtitle: "Kineto",
     year: "2026",
     video: "kineto-branding-presentation",
+    coverVideo: "kineto-branding-presentation-cover",
     alt: "Kineto brand identity motion presentation",
   },
   {
@@ -55,6 +62,7 @@ export const projects: Project[] = [
     subtitle: "Foundation of Digital Competences",
     year: "2024",
     image: "marchForScience",
+    coverImage: "march-for-science-cover",
     alt: "Screenshot of the redesigned March for Science Foundation website homepage",
   },
 ];

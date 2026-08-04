@@ -19,8 +19,8 @@ const base = import.meta.env.BASE_URL;
       <WorkCard
         href={`${base}/work/${project.slug}`}
         slug={project.slug}
-        image={project.image}
-        video={project.video}
+        image={project.coverImage ?? project.image}
+        video={project.coverVideo ?? project.video}
         alt={project.alt}
         title={project.title}
         subtitle={project.subtitle}
