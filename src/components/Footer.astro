@@ -2,6 +2,9 @@
 const year = new Date().getFullYear();
 const email = "bdziegiel.nmhprojekt@gmail.com";
 
+// Hidden for now until more social cases (Dribbble, Behance, etc.) are ready.
+const showSocials = false;
+
 const socials = [
   { href: "https://www.behance.net/", label: "Behance" },
   { href: "https://dribbble.com/", label: "Dribble" },
@@ -20,11 +23,13 @@ const socials = [
 
 <footer class="footer">
   <p class="footer__copy">&copy; {year} Bartek Dzięgiel.</p>
-  <ul class="footer__socials">
-    {socials.map((social) => (
-      <li><a href={social.href} target="_blank" rel="noopener noreferrer">{social.label}</a></li>
-    ))}
-  </ul>
+  {showSocials && (
+    <ul class="footer__socials">
+      {socials.map((social) => (
+        <li><a href={social.href} target="_blank" rel="noopener noreferrer">{social.label}</a></li>
+      ))}
+    </ul>
+  )}
 </footer>
 
 <style>
