@@ -10,6 +10,9 @@ const links = [
   { href: `${base}/about`, label: "About+Contact" },
 ];
 
+// Hidden for now until more social cases (Dribbble, Behance, etc.) are ready.
+const showSocials = false;
+
 const socials = [
   { href: "https://www.behance.net/", label: "Behance" },
   { href: "https://dribbble.com/", label: "Dribble" },
@@ -54,11 +57,13 @@ const socials = [
     </ul>
 
     <div class="nav__menu-footer">
-      <ul class="nav__menu-socials">
-        {socials.map((social) => (
-          <li><a href={social.href} target="_blank" rel="noopener noreferrer">{social.label}</a></li>
-        ))}
-      </ul>
+      {showSocials && (
+        <ul class="nav__menu-socials">
+          {socials.map((social) => (
+            <li><a href={social.href} target="_blank" rel="noopener noreferrer">{social.label}</a></li>
+          ))}
+        </ul>
+      )}
       <p class="nav__menu-copy">&copy; {year} Bartek Dzięgiel.</p>
     </div>
   </div>
