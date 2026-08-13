@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
 
 interface Props {
   href: string;
@@ -38,7 +39,7 @@ const [, firstImage] =
       <h3 class="case-study-card__title">{title}</h3>
       <p class="case-study-card__meta">{year} | {tags.join(", ")}</p>
       <a class="case-study-card__cta" href={href}>
-        Learn more <span aria-hidden="true">&rarr;</span>
+        Learn more <Icon name="arrow-right" size={16} />
       </a>
     </div>
     <p class="case-study-card__description">{description}</p>

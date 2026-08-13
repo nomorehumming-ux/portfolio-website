@@ -1,5 +1,6 @@
 ---
 import { projects } from "../data/projects";
+import Icon from "./Icon.astro";
 
 interface Props {
   slug: string;
@@ -18,10 +19,10 @@ const next = byYearDesc[(index + 1) % byYearDesc.length];
   <h2 class="project-nav__heading">See other projects</h2>
   <div class="project-nav__links">
     <a class="project-nav__link project-nav__link--prev" href={`${base}/work/${prev.slug}`}>
-      <span aria-hidden="true">&larr;</span> Previous project
+      <Icon name="arrow-left" size={16} /> Previous project
     </a>
     <a class="project-nav__link project-nav__link--next" href={`${base}/work/${next.slug}`}>
-      Next project <span aria-hidden="true">&rarr;</span>
+      Next project <Icon name="arrow-right" size={16} />
     </a>
   </div>
 </nav>
@@ -55,6 +56,9 @@ const next = byYearDesc[(index + 1) % byYearDesc.length];
   }
 
   .project-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
     font-family: var(--text-body-regular-font);
     font-size: var(--text-body-regular-size);
     color: var(--color-fg);
